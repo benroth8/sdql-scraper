@@ -67,7 +67,7 @@ def getMLBPlays(query, date, season):
         if gameSeason < season:
             break
         if gameDate == date:
-            print(f'{team} - {query[2]} --- {query[1]} --- {query[3]}', end = '\n')
+            print(f'{team} - {query[2]} --- {query[1]}', end = '\n')
 
 def getNHLPlays(query, date, season):
     queryURL = query[0]
