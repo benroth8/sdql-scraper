@@ -3,12 +3,11 @@ import nfl_queries
 import nba_queries
 import ncaafb_queries
 import mlb_queries
-import nhl_queries
 import time
 
 if __name__ == '__main__':
-    sport = int(input('Enter 0 for NBA, 1 for NFL, 2 for NCAAFB, 3 for MLB, 4 for NHL: '))
-    season = 2020
+    sport = int(input('Enter 0 for NBA, 1 for NFL, 2 for NCAAFB, 3 for MLB: '))
+    season = 2021
     months = {
             1: "Jan",
             2: "Feb", 
@@ -24,7 +23,7 @@ if __name__ == '__main__':
             12: "Dec"
         }
 
-    if sport == 0 or sport > 3: #NBA and NHL
+    if sport == 0: #NBA
         month = int(input("Enter month: "))
         day = int(input("Enter day: "))
         if month >= 10:
@@ -37,35 +36,25 @@ if __name__ == '__main__':
         else:
             dayStr = f'{day}'
 
-        date = f'{months.get(month)} {dayStr}, {year}'
+        date = f'{year}{month}{dayStr}'
         
-        if sport == 0:
-            for query in nba_queries.queries:
-                try:
-                    scrapeData.getNBAPlays(query, date, season)
-                    time.sleep(1)
-                except:
-                    print(f'Error for {query[1]}')  
-                    
-        else:
-            for query in nhl_queries.queries:
-                try:
-                    scrapeData.getNHLPlays(query, date, season)
-                    time.sleep(1)
-                except:
-                    print(f'Error for {query[1]}')      
+        for query in nba_queries.queries:
+            try:
+                scrapeData.getNBAPlaysS3(query, date, season)
+                time.sleep(1)
+            except:
+                print(f'Error for {query[1]}')    
 
-    elif sport == 1 or sport == 2: #NFL
+    elif sport == 1 or sport == 2: #NFL and NCAAFB
         week = int(input('Enter week of the season: '))
         if sport == 1:
-            queryList = nfl_queries.queries
+            queryList = nfl_queries.s3queries
         else:
-            queryList = ncaafb_queries.queries
+            queryList = ncaafb_queries.s3queries
 
         for query in queryList:
             try:
-                scrapeData.getFootballPlaysBacktesting(query, week, season)
-                #scrapeData.getFootballPlays(query, week, season)
+                scrapeData.getFootballPlaysS3(query, week, season)
                 time.sleep(1)
             except:
                 print(f'Error for {query[1]}')
@@ -88,4 +77,3 @@ if __name__ == '__main__':
                 time.sleep(1)
             except:
                 print(f'Error for {query[1]}')
-
