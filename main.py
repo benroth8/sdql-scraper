@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
         date = f'{year}{month}{dayStr}'
         
-        for query in nba_queries.queries:
+        for query in queries_example.nbaS3queries:
             try:
                 scrapeData.getNBAPlaysS3(query, date, season)
                 time.sleep(1)
@@ -45,9 +45,9 @@ if __name__ == '__main__':
     elif sport == 1 or sport == 2: #NFL and NCAAFB
         week = int(input('Enter week of the season: '))
         if sport == 1:
-            queryList = nfl_queries.s3queries
+            queryList = queries_example.nflS3queries
         else:
-            queryList = ncaafb_queries.s3queries
+            queryList = queries_example.ncaafbS3queries
 
         for query in queryList:
             try:
