@@ -1,5 +1,5 @@
 import scrapeData
-import sample_queries
+import queries_example
 import time
 
 if __name__ == '__main__':
