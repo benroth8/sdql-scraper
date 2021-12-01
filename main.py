@@ -6,7 +6,7 @@ import mlb_queries
 import time
 
 if __name__ == '__main__':
-    sport = int(input('Enter 0 for NBA, 1 for NFL, 2 for NCAAFB, 3 for MLB: '))
+    sport = int(input('Enter 0 for NBA, 1 for NFL, 2 for NCAAFB:'))
     season = 2021
     months = {
             1: "Jan",
@@ -55,25 +55,6 @@ if __name__ == '__main__':
         for query in queryList:
             try:
                 scrapeData.getFootballPlaysS3(query, week, season)
-                time.sleep(1)
-            except:
-                print(f'Error for {query[1]}')
-    
-    elif sport == 3: #MLB
-        month = int(input("Enter month: "))
-        day = int(input("Enter day: "))
-        season = 2021
-        
-        if day < 10:
-            dayStr = f'0{day}'
-        else:
-            dayStr = f'{day}'
-
-        date = f'{months.get(month)} {dayStr}, {season}'
-
-        for query in mlb_queries.queries:
-            try:
-                scrapeData.getMLBPlays(query, date, season)
                 time.sleep(1)
             except:
                 print(f'Error for {query[1]}')
