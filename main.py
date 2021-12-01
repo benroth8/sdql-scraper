@@ -1,8 +1,5 @@
 import scrapeData
-import nfl_queries
-import nba_queries
-import ncaafb_queries
-import mlb_queries
+import sample_queries
 import time
 
 if __name__ == '__main__':
